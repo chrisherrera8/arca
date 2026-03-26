@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen, fireEvent } from '../tests/test-utils'
+import { render, screen, fireEvent } from '../../tests/test-utils'
 import Sidebar from './Sidebar'
-import { TEST_ADMIN_USER } from '../tests/fixtures'
+import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('Sidebar Component', () => {
   const mockNavigate = vi.fn()
