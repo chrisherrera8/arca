@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '../../tests/test-utils'
+import { render, screen, fireEvent } from '../../tests/test-utils'
 import BudgetList from './BudgetList'
-import { TEST_ADMIN_USER, TEST_BUDGETS } from '../../tests/fixtures'
+import App from '../App'
+import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('BudgetList Page', () => {
   it('renders the page heading', () => {
@@ -46,13 +47,13 @@ describe('BudgetList Page', () => {
   })
 
   it('navigates to budget creation when "Add Budget" is clicked', () => {
-    render(<BudgetList />, {
+    render(<App />, {
       currentUser: TEST_ADMIN_USER,
       initialRoute: '/budgets',
     })
 
     const addButton = screen.getByRole('button', { name: /add budget/i })
-    addButton.click()
+    fireEvent.click(addButton)
 
     expect(screen.getByRole('heading', { name: /create budget/i })).toBeInTheDocument()
   })

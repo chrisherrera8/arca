@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '../../tests/test-utils'
 import userEvent from '@testing-library/user-event'
 import BudgetCreate from './BudgetCreate'
-import { TEST_ADMIN_USER, TEST_TEAMS } from '../../tests/fixtures'
+import App from '../App'
+import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('BudgetCreate Page', () => {
   it('renders the page heading', () => {
@@ -96,7 +97,7 @@ describe('BudgetCreate Page', () => {
 
   it('submits the form and navigates to budgets list on success', async () => {
     const user = userEvent.setup()
-    render(<BudgetCreate />, {
+    render(<App />, {
       currentUser: TEST_ADMIN_USER,
       initialRoute: '/budget/create',
     })

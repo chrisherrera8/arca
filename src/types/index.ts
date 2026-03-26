@@ -1,56 +1,46 @@
 // User types
+export type UserRole = 'admin' | 'member' | 'viewer'
+
 export interface User {
   id: string
   name: string
   email: string
   role: UserRole
+  avatar?: string
   createdAt: Date
   updatedAt: Date
 }
 
-export type UserRole = 'admin' | 'community_member' | 'moderator'
-
-// Community types
-export interface Community {
+// Team types
+export interface Team {
   id: string
   name: string
-  description: string
-  icon?: string
+  description?: string
+  memberCount: number
+  createdAt: Date
+}
+
+// Budget types
+export type BudgetStatus = 'active' | 'exhausted' | 'draft'
+
+export interface Budget {
+  id: string
+  name: string
+  amount: number
+  teamId: string
+  teamName: string
+  status: BudgetStatus
+  spent: number
+  createdBy: string
   createdAt: Date
   updatedAt: Date
 }
 
-// Thread types
-export interface Thread {
-  id: string
-  title: string
-  content: string
-  authorId: string
-  communityId: string
-  createdAt: Date
-  updatedAt: Date
-  pinned: boolean
+export interface BudgetFormData {
+  name: string
+  amount: number
+  teamId: string
 }
 
-// Reply types
-export interface Reply {
-  id: string
-  content: string
-  authorId: string
-  threadId: string
-  createdAt: Date
-  updatedAt: Date
-}
-
-// Moderation types
-export interface ModerationLog {
-  id: string
-  action: ModerationAction
-  targetId: string
-  targetType: 'thread' | 'reply' | 'community' | 'user'
-  moderatorId: string
-  reason: string
-  createdAt: Date
-}
-
-export type ModerationAction = 'delete' | 'warn' | 'suspend' | 'restore'
+// Navigation types
+export type PageName = 'dashboard' | 'budgets' | 'budget-create' | 'teams' | 'analytics' | 'settings' | 'logout'

@@ -1,18 +1,19 @@
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import AppLayout from '@/components/AppLayout'
+import Dashboard from '@/pages/Dashboard'
+import BudgetCreate from '@/pages/BudgetCreate'
+import BudgetList from '@/pages/BudgetList'
 
 function App() {
   return (
-    <div className="app">
-      <header>
-        <h1>Arca Expense Management</h1>
-        <p>A simple solution for managing your expenses</p>
-      </header>
-      <main>
-        <section>
-          <p>Coming soon...</p>
-        </section>
-      </main>
-    </div>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/budget/create" element={<BudgetCreate />} />
+        <Route path="/budgets" element={<BudgetList />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
   )
 }
 
