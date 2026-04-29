@@ -176,10 +176,3 @@ npm install
 npm run build
 ```
 
-## Contributing
-
-Please refer to the main Arca repository for contribution guidelines.
-
-## License
-
-See LICENSE file in root repository.
