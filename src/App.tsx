@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import './App.css'
 import AppLayout from '@/components/AppLayout'
 import Dashboard from '@/pages/Dashboard'
 import BudgetCreate from '@/pages/BudgetCreate'

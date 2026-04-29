@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { useBudgets } from '@/contexts/BudgetContext'
+import styles from './BudgetCreate.module.css'
 
 export default function BudgetCreate() {
   const navigate = useNavigate()
@@ -31,35 +32,38 @@ export default function BudgetCreate() {
   }
 
   return (
-    <div className="budget-create">
-      <h1>Create Budget</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="budget-name">Budget Name</label>
+    <div className={styles.budgetCreate}>
+      <h1 className={styles.title}>Create Budget</h1>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="budget-name">Budget Name</label>
           <input
             id="budget-name"
+            className={styles.input}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.name && <span className={styles.error}>{errors.name}</span>}
         </div>
 
-        <div>
-          <label htmlFor="budget-amount">Budget Amount</label>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="budget-amount">Budget Amount</label>
           <input
             id="budget-amount"
+            className={styles.input}
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          {errors.amount && <span className="error">{errors.amount}</span>}
+          {errors.amount && <span className={styles.error}>{errors.amount}</span>}
         </div>
 
-        <div>
-          <label htmlFor="budget-team">Team</label>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="budget-team">Team</label>
           <select
             id="budget-team"
+            className={styles.select}
             value={teamId}
             onChange={(e) => setTeamId(e.target.value)}
           >
@@ -70,10 +74,10 @@ export default function BudgetCreate() {
               </option>
             ))}
           </select>
-          {errors.teamId && <span className="error">{errors.teamId}</span>}
+          {errors.teamId && <span className={styles.error}>{errors.teamId}</span>}
         </div>
 
-        <button type="submit">Create Budget</button>
+        <button type="submit" className={styles.submitButton}>Create Budget</button>
       </form>
     </div>
   )

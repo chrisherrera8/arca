@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
+import styles from './AppLayout.module.css'
 
 export default function AppLayout() {
   const { currentUser } = useAuth()
@@ -36,9 +37,9 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="app-layout">
+    <div className={styles.appLayout}>
       <Sidebar currentUser={currentUser} onNavigate={handleNavigate} />
-      <div className="app-main">
+      <div className={styles.appMain}>
         <TopBar currentUser={currentUser} />
         <main>
           <Outlet />

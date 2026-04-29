@@ -1,0 +1,23 @@
+.appLayout {
+  display: flex;
+  min-height: 100svh;
+  background-color: var(--color-bg);
+}
+
+.appMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.appMain main {
+  flex: 1;
+  padding: 48px;
+}
+
+@media (max-width: 1024px) {
+  .appMain main {
+    padding: 24px;
+  }
+}

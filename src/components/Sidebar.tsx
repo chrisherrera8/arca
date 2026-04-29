@@ -1,4 +1,5 @@
 import type { User, PageName } from '@/types'
+import styles from './Sidebar.module.css'
 
 interface SidebarProps {
   currentUser: User
@@ -15,16 +16,20 @@ const navItems = [
 
 export default function Sidebar({ onNavigate, activePage }: SidebarProps) {
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <span className="org-name">Acme</span>
+    <aside className={styles.sidebar}>
+      <div className={styles.header}>
+        <span className={styles.orgName}>Acme</span>
       </div>
 
-      <nav className="sidebar-nav">
+      <nav className={styles.nav}>
         {navItems.map(({ label, page }) => (
-          <div key={page} data-active={activePage === page ? 'true' : undefined}>
+          <div
+            key={page}
+            className={`${styles.navItem} ${activePage === page ? styles.navItemActive : ''}`}
+          >
             <a
               href={`#${page}`}
+              className={styles.navLink}
               onClick={(e) => {
                 e.preventDefault()
                 onNavigate(page)
@@ -36,9 +41,9 @@ export default function Sidebar({ onNavigate, activePage }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="sidebar-footer">
-        <button onClick={() => onNavigate('settings')}>Settings</button>
-        <button onClick={() => onNavigate('logout')}>Logout</button>
+      <div className={styles.footer}>
+        <button className={styles.footerButton} onClick={() => onNavigate('settings')}>Settings</button>
+        <button className={styles.footerButton} onClick={() => onNavigate('logout')}>Logout</button>
       </div>
     </aside>
   )
