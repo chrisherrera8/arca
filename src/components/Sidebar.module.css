@@ -14,10 +14,9 @@
 }
 
 .orgName {
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  letter-spacing: 2px;
+  font-size: var(--text-base);
   text-transform: uppercase;
+  letter-spacing: 1px;
   color: var(--color-text-primary);
 }
 
@@ -36,19 +35,18 @@
 .navLink {
   display: block;
   padding: 8px 10px;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
   transition: color 150ms ease;
 }
 
 .navLink:hover {
-  color: var(--color-text-muted);
+  color: var(--color-brand);
 }
 
 .navItemActive .navLink {
-  background-color: var(--color-surface-hover);
   color: var(--color-text-primary);
+  background-color: var(--color-surface-hover);
 }
 
 .footer {
@@ -66,13 +64,12 @@
   padding: 8px 10px;
   background: none;
   border: none;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: color 150ms ease;
 }
 
 .footerButton:hover {
-  color: var(--color-text-muted);
+  color: var(--color-brand);
 }

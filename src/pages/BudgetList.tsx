@@ -10,7 +10,7 @@ export default function BudgetList() {
     <div className={styles.budgetList}>
       <div className={styles.header}>
         <h1>Budgets</h1>
-        <button className={styles.addButton} onClick={() => navigate('/budget/create')}>Add Budget</button>
+        <button className="btn btn-primary" onClick={() => navigate('/budget/create')}>Add Budget</button>
       </div>
 
       {budgets.length === 0 ? (

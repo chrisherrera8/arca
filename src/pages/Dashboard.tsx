@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <div data-testid="dashboard-header" className={styles.header}>
-        <button className={styles.addButton} onClick={() => navigate('/budget/create')}>Add Budget</button>
+        <button className="btn btn-primary" onClick={() => navigate('/budget/create')}>Add Budget</button>
       </div>
 
       {isEmpty && (
