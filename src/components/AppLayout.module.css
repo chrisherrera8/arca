@@ -1,7 +1,7 @@
 .appLayout {
   display: flex;
   min-height: 100svh;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-default);
 }
 
 .appMain {
@@ -13,11 +13,11 @@
 
 .appMain main {
   flex: 1;
-  padding: 48px;
+  padding: var(--spacing-lg);
 }
 
 @media (max-width: 1024px) {
   .appMain main {
-    padding: 24px;
+    padding: var(--spacing-sm);
   }
 }

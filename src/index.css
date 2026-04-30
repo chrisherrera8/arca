@@ -1,94 +1,147 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-/* ── Design Tokens ───────────────────────────────────────────────────── */
+/* ── Layer 1: Primitives (brand-specific raw values) ─────────────────── */
+/* Update these when rebranding. Never referenced directly by components. */
 @theme {
-  /* Fonts — Arial-based stack per Mistral spec */
-  --font-sans: Arial, ui-sans-serif, system-ui, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  --primitive-font: "Inter", "FerrariSans", -apple-system, system-ui, sans-serif;
 
-  /* Colors — backgrounds */
-  --color-bg: #fffaeb;
-  --color-surface: #fff0c2;
-  --color-surface-hover: #ffe295;
-  --color-dark: #1f1f1f;
+  --primitive-red:          #da291c;
+  --primitive-red-active:   #b01e0a;
+  --primitive-near-black:   #181818;
+  --primitive-elevated:     #303030;
+  --primitive-white:        #ffffff;
+  --primitive-soft-light:   #f7f7f7;
+  --primitive-strong-light: #ebebeb;
+  --primitive-body-grey:    #969696;
+  --primitive-muted:        #666666;
+  --primitive-muted-soft:   #8f8f8f;
+  --primitive-hairline:     #303030;
+  --primitive-hairline-light: #d2d2d2;
+  --primitive-yellow:       #f6e500;
+  --primitive-info:         #4c98b9;
+  --primitive-success:      #03904a;
+  --primitive-warning:      #f13a2c;
 
-  /* Colors — text */
-  --color-text-primary: #1f1f1f;
-  --color-text-secondary: hsl(0, 0%, 24%);
-  --color-text-muted: rgba(31, 31, 31, 0.5);
-  --color-text-disabled: rgba(31, 31, 31, 0.3);
-  --color-text-on-dark: #ffffff;
+  /* Spacing ladder */
+  --primitive-space-xxxs: 4px;
+  --primitive-space-xxs:  8px;
+  --primitive-space-xs:   16px;
+  --primitive-space-sm:   24px;
+  --primitive-space-md:   32px;
+  --primitive-space-lg:   48px;
+  --primitive-space-xl:   64px;
+  --primitive-space-xxl:  96px;
+  --primitive-space-super: 128px;
 
-  /* Colors — borders */
-  --color-border: rgba(31, 31, 31, 0.12);
-  --color-border-strong: rgba(31, 31, 31, 0.24);
+  /* Radius scale */
+  --primitive-radius-none: 0px;
+  --primitive-radius-xs:   2px;
+  --primitive-radius-sm:   4px;
+  --primitive-radius-md:   6px;
+  --primitive-radius-lg:   8px;
+  --primitive-radius-xl:   12px;
+  --primitive-radius-full: 9999px;
 
-  /* Colors — brand */
-  --color-brand: #fa520f;
-  --color-brand-flame: #fb6424;
-  --color-brand-orange: #ff8105;
-  --color-sunshine-900: #ff8a00;
-  --color-sunshine-700: #ffa110;
-  --color-sunshine-500: #ffb83e;
-  --color-sunshine-300: #ffd06a;
-  --color-block-gold: #ffe295;
-  --color-bright-yellow: #ffd900;
-
-  /* Colors — button primary (dark solid) */
-  --color-btn-primary-bg: #1f1f1f;
-  --color-btn-primary-text: #ffffff;
-  --color-btn-primary-hover: #3a3a3a;
-
-  /* Colors — button secondary (cream) */
-  --color-btn-secondary-bg: #fff0c2;
-  --color-btn-secondary-text: #1f1f1f;
-  --color-btn-secondary-hover: #ffe295;
-
-  /* Colors — focus */
-  --color-focus-ring: #fa520f;
-
-  /* Shadows — warm golden system */
-  --shadow-golden:
-    rgba(127, 99, 21, 0.12) -8px 16px 39px,
-    rgba(127, 99, 21, 0.10) -33px 64px 72px,
-    rgba(127, 99, 21, 0.06) -73px 144px 97px,
-    rgba(127, 99, 21, 0.03) -130px 256px 116px,
-    rgba(127, 99, 21, 0.01) -202px 400px 127px;
-
-  /* Gradients — Mistral block identity */
-  --gradient-block: linear-gradient(
-    to right,
-    #ffd900,
-    #ffe295,
-    #ffa110,
-    #ff8105,
-    #fb6424,
-    #fa520f
-  );
-
-  /* Spacing (8px grid) */
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 24px;
-  --spacing-4: 48px;
-  --spacing-5: 96px;
-
-  /* Border radius — near-zero, sharp architectural geometry */
-  --radius-none: 0px;
-  --radius-subtle: 2px;
+  /* Type scale */
+  --primitive-text-caption:      0.6875rem;
+  --primitive-text-xs:           0.75rem;
+  --primitive-text-sm:           0.8125rem;
+  --primitive-text-base:         0.875rem;
+  --primitive-text-title-sm:     1rem;
+  --primitive-text-title-md:     1.125rem;
+  --primitive-text-display-md:   1.625rem;
+  --primitive-text-display-lg:   2.25rem;
+  --primitive-text-display-xl:   3.5rem;
+  --primitive-text-display-mega: 5rem;
 
   /* Font weights */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
+  --primitive-weight-normal:    400;
+  --primitive-weight-medium:    500;
+  --primitive-weight-semibold:  600;
+  --primitive-weight-bold:      700;
+}
 
-  /* Font size scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 2rem;
+/* ── Layer 2: Semantic aliases (stable names used by all components) ─── */
+/* Re-point these when rebranding. Component CSS modules never change.   */
+@theme {
+  --font-sans: var(--primitive-font);
+
+  /* Surfaces */
+  --color-surface-default:  var(--primitive-near-black);
+  --color-surface-raised:   var(--primitive-elevated);
+  --color-surface-hover:    var(--primitive-near-black);
+  --color-surface-light:    var(--primitive-white);
+  --color-surface-soft:     var(--primitive-soft-light);
+
+  /* Borders */
+  --color-border-default:   var(--primitive-hairline);
+  --color-border-light:     var(--primitive-hairline-light);
+
+  /* Text */
+  --color-text-default:     var(--primitive-white);
+  --color-text-secondary:   var(--primitive-body-grey);
+  --color-text-muted:       var(--primitive-muted);
+  --color-text-disabled:    var(--primitive-muted-soft);
+  --color-text-on-light:    var(--primitive-near-black);
+  --color-text-on-accent:   var(--primitive-white);
+
+  /* Accent */
+  --color-accent:           var(--primitive-red);
+  --color-accent-active:    var(--primitive-red-active);
+
+  /* Semantic */
+  --color-error:            var(--primitive-warning);
+  --color-success:          var(--primitive-success);
+  --color-info:             var(--primitive-info);
+
+  /* Focus */
+  --color-focus-ring:       var(--primitive-yellow);
+
+  /* Spacing */
+  --spacing-xxxs: var(--primitive-space-xxxs);
+  --spacing-xxs:  var(--primitive-space-xxs);
+  --spacing-xs:   var(--primitive-space-xs);
+  --spacing-sm:   var(--primitive-space-sm);
+  --spacing-md:   var(--primitive-space-md);
+  --spacing-lg:   var(--primitive-space-lg);
+  --spacing-xl:   var(--primitive-space-xl);
+  --spacing-xxl:  var(--primitive-space-xxl);
+  --spacing-super: var(--primitive-space-super);
+
+  /* Radius */
+  --radius-none: var(--primitive-radius-none);
+  --radius-xs:   var(--primitive-radius-xs);
+  --radius-sm:   var(--primitive-radius-sm);
+  --radius-md:   var(--primitive-radius-md);
+  --radius-lg:   var(--primitive-radius-lg);
+  --radius-xl:   var(--primitive-radius-xl);
+  --radius-full: var(--primitive-radius-full);
+
+  /* Type scale */
+  --text-caption:      var(--primitive-text-caption);
+  --text-xs:           var(--primitive-text-xs);
+  --text-sm:           var(--primitive-text-sm);
+  --text-base:         var(--primitive-text-base);
+  --text-title-sm:     var(--primitive-text-title-sm);
+  --text-title-md:     var(--primitive-text-title-md);
+  --text-display-md:   var(--primitive-text-display-md);
+  --text-display-lg:   var(--primitive-text-display-lg);
+  --text-display-xl:   var(--primitive-text-display-xl);
+  --text-display-mega: var(--primitive-text-display-mega);
+
+  /* Font weights */
+  --font-weight-normal:   var(--primitive-weight-normal);
+  --font-weight-medium:   var(--primitive-weight-medium);
+  --font-weight-semibold: var(--primitive-weight-semibold);
+  --font-weight-bold:     var(--primitive-weight-bold);
+
+  /* Shadow */
+  --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Gradients */
+  --gradient-brand-red:        linear-gradient(180deg, #a00c01, #da291c 64%);
+  --gradient-dark-atmospheric: linear-gradient(180deg, #3c3c3c, #030303 64%);
 }
 
 /* ── Base ────────────────────────────────────────────────────────────── */
@@ -101,8 +154,8 @@ html {
   font-size: 16px;
   line-height: 1.5;
   font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-default);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -110,7 +163,7 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-default);
 }
 
 #root {
@@ -122,37 +175,46 @@ body {
 /* ── Typography ──────────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
   margin: 0;
 }
 
-h1 { font-size: var(--text-2xl); line-height: 1.15; }
-h2 { font-size: var(--text-xl);  line-height: 1.2;  }
-h3 { font-size: var(--text-lg);  line-height: 1.2;  }
+h1 { font-size: var(--text-display-mega); line-height: 1.05; letter-spacing: -1.6px; }
+h2 { font-size: var(--text-display-xl);   line-height: 1.1;  letter-spacing: -1.12px; }
+h3 { font-size: var(--text-display-lg);   line-height: 1.2;  letter-spacing: -0.36px; }
+h4 { font-size: var(--text-display-md);   line-height: 1.5;  letter-spacing: 0.195px; }
+h5 { font-size: var(--text-title-md);     line-height: 1.2;  font-weight: var(--font-weight-bold); }
+h6 { font-size: var(--text-title-sm);     line-height: 1.4;  letter-spacing: 0.08px; }
 
-p { margin: 0; }
+p {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
 
 a {
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 150ms ease;
 }
-a:hover { color: var(--color-brand); }
+a:hover { color: var(--color-text-default); }
 
 /* ── Reusable component classes ──────────────────────────────────────── */
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  font-weight: var(--font-weight-normal);
-  line-height: 1.5;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.0;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  padding: 12px 24px;
+  padding: 14px 32px;
+  height: 48px;
   border-radius: var(--radius-none);
   border: none;
   cursor: pointer;
@@ -165,96 +227,155 @@ a:hover { color: var(--color-brand); }
 }
 
 .btn-primary {
-  background-color: var(--color-btn-primary-bg);
-  color: var(--color-btn-primary-text);
+  background-color: var(--color-accent);
+  color: var(--color-text-on-accent);
 }
-.btn-primary:hover { background-color: var(--color-btn-primary-hover); }
+.btn-primary:active { background-color: var(--color-accent-active); }
 
-.btn-secondary {
-  background-color: var(--color-btn-secondary-bg);
-  color: var(--color-btn-secondary-text);
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text-default);
+  border: 1px solid var(--color-text-default);
+  padding: 13px 31px;
 }
-.btn-secondary:hover { background-color: var(--color-btn-secondary-hover); }
 
-.btn-ghost {
-  background-color: oklab(0, 0, 0 / 0.1);
-  color: var(--color-text-primary);
-  opacity: 0.4;
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--color-text-on-light);
+  border: 1px solid var(--color-text-on-light);
+  padding: 13px 31px;
 }
-.btn-ghost:hover { opacity: 0.7; }
 
 .btn-text {
   background: none;
   border: none;
-  padding: 8px 0 0;
+  padding: 0;
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
-  text-transform: none;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--color-text-default);
+  cursor: pointer;
 }
-.btn-text:hover { color: var(--color-brand); }
 
-/* Cards */
 .card {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-raised);
   border-radius: var(--radius-none);
-  padding: 24px;
-  box-shadow: var(--shadow-golden);
+  padding: var(--spacing-sm);
 }
 
-/* Form inputs */
+.card-light {
+  background-color: var(--color-surface-light);
+  border-radius: var(--radius-none);
+  padding: var(--spacing-md);
+  color: var(--color-text-on-light);
+}
+
 .input {
   width: 100%;
-  background-color: #ffffff;
-  border: 1px solid hsl(240, 5.9%, 90%);
-  border-radius: var(--radius-none);
-  padding: 10px 12px;
+  background-color: var(--color-surface-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  height: 48px;
   font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
+  color: var(--color-text-default);
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
-.input::placeholder { color: var(--color-text-disabled); }
+.input::placeholder { color: var(--color-text-muted); }
 .input:focus {
   outline: none;
   border-color: var(--color-focus-ring);
-  box-shadow: 0 0 0 3px rgba(250, 82, 15, 0.2);
+  box-shadow: 0 0 0 3px rgba(246, 229, 0, 0.2);
 }
+
+.input-light {
+  background-color: var(--color-surface-light);
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-on-light);
+}
+.input-light::placeholder { color: var(--color-text-disabled); }
 
 .label {
   font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--color-text-disabled);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: var(--spacing-xxxs);
 }
 
-/* Badges / Tags */
-.tag {
+.badge {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 1.1px;
   text-transform: uppercase;
-  color: var(--color-text-primary);
-  background-color: var(--color-surface);
-  border-radius: var(--radius-none);
-  padding: 4px 8px;
+  color: var(--color-text-default);
+  background-color: var(--color-surface-raised);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
 }
 
-/* Divider */
 .divider {
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-default);
   margin: 0;
 }
 
-/* Mistral block gradient bar */
-.block-gradient {
-  height: 4px;
-  background: var(--gradient-block);
+.divider-light {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  margin: 0;
+}
+
+.nav {
+  background-color: var(--color-surface-default);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: var(--color-text-default);
+  line-height: 1.4;
+}
+
+.livery-band {
+  background-color: var(--color-accent);
+  color: var(--color-text-on-accent);
+  padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+.number-display {
+  font-family: var(--font-sans);
+  font-size: var(--text-display-mega);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.0;
+  letter-spacing: -1.6px;
+  color: var(--color-text-default);
+}
+
+.race-number {
+  color: var(--color-accent);
+}
+
+.footer {
+  background-color: var(--color-surface-default);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  font-size: var(--text-sm);
+  line-height: 1.5;
 }

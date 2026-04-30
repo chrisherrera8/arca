@@ -1,7 +1,7 @@
 .budgetList {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: var(--spacing-lg);
 }
 
 .header {
@@ -16,16 +16,16 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-golden);
+  box-shadow: var(--shadow-default);
 }
 
 .listItem {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--spacing-sm);
   padding: 16px 20px;
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-default);
   transition: background-color 150ms ease;
 }
 
@@ -40,12 +40,12 @@
 .itemName {
   flex: 1;
   font-size: var(--text-base);
-  color: var(--color-text-primary);
+  color: var(--color-text-default);
 }
 
 .itemAmount {
   font-size: var(--text-sm);
-  color: var(--color-brand);
+  color: var(--color-accent);
 }
 
 .itemTeam {

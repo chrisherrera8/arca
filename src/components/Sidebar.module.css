@@ -3,21 +3,21 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border-default);
+  background-color: var(--color-surface-raised);
   flex-shrink: 0;
 }
 
 .header {
   padding: 24px 20px 20px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border-default);
 }
 
 .orgName {
   font-size: var(--text-base);
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-text-primary);
+  color: var(--color-text-default);
 }
 
 .nav {
@@ -41,17 +41,17 @@
 }
 
 .navLink:hover {
-  color: var(--color-brand);
+  color: var(--color-text-default);
 }
 
 .navItemActive .navLink {
-  color: var(--color-text-primary);
+  color: var(--color-text-default);
   background-color: var(--color-surface-hover);
 }
 
 .footer {
   padding: 16px 12px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-default);
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -71,5 +71,5 @@
 }
 
 .footerButton:hover {
-  color: var(--color-brand);
+  color: var(--color-text-default);
 }
