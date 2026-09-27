@@ -3,6 +3,7 @@ import styles from './Sidebar.module.css'
 
 interface SidebarProps {
   currentUser: User
+  orgName?: string
   onNavigate: (page: string) => void
   activePage?: PageName
 }
@@ -14,11 +15,11 @@ const navItems = [
   { label: 'Analytics', page: 'analytics' },
 ] as const
 
-export default function Sidebar({ onNavigate, activePage }: SidebarProps) {
+export default function Sidebar({ orgName, onNavigate, activePage }: SidebarProps) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
-        <span className={styles.orgName}>Acme</span>
+        <span className={styles.orgName}>{orgName ?? 'Personal account'}</span>
       </div>
 
       <nav className={styles.nav}>

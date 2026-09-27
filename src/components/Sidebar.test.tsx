@@ -11,7 +11,7 @@ describe('Sidebar Component', () => {
   })
 
   it('renders organization name "Acme"', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar currentUser={TEST_ADMIN_USER} orgName="Acme" onNavigate={mockNavigate} />)
     
     const orgName = screen.getByText('Acme')
     expect(orgName).toBeInTheDocument()

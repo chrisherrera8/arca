@@ -1,14 +1,27 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useAuth } from '@/contexts/AuthContext'
+import { useUser, useOrganization } from '@clerk/react'
+import type { User } from '@/types'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 import styles from './AppLayout.module.css'
 
 export default function AppLayout() {
-  const { currentUser } = useAuth()
+  const { user, isLoaded } = useUser()
+  const { organization, membership } = useOrganization()
   const navigate = useNavigate()
 
-  if (!currentUser) return null
+  if (!isLoaded) return null
+  if (!user) return null
+
+  const currentUser: User = {
+    id: user.id,
+    name: user.fullName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? 'Unknown',
+    email: user.primaryEmailAddress?.emailAddress ?? '',
+    role: (membership?.role.replace('org:', '') as User['role']) ?? 'member',
+    avatar: user.imageUrl,
+    createdAt: user.createdAt ?? new Date(),
+    updatedAt: user.updatedAt ?? new Date(),
+  }
 
   const handleNavigate = (page: string) => {
     switch (page) {
@@ -38,7 +51,7 @@ export default function AppLayout() {
 
   return (
     <div className={styles.appLayout}>
-      <Sidebar currentUser={currentUser} onNavigate={handleNavigate} />
+      <Sidebar currentUser={currentUser} orgName={organization?.name} onNavigate={handleNavigate} />
       <div className={styles.appMain}>
         <TopBar currentUser={currentUser} />
         <main>
