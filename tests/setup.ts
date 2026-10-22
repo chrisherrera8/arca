@@ -25,6 +25,7 @@ vi.mock('@clerk/react', () => ({
     },
   }),
   useOrganization: () => ({ organization: { name: 'Acme' }, membership: null }),
+  SignIn: () => null,
   SignUp: () => null,
   ClerkProvider: ({ children }: { children: ReactNode }) => children,
 }))

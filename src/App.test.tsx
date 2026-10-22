@@ -43,4 +43,12 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /budgets/i })).toBeInTheDocument()
   })
+
+  it('renders the sign-in route without the app shell', () => {
+    render(<App />, {
+      initialRoute: '/sign-in',
+    })
+
+    expect(screen.queryByText('Acme')).not.toBeInTheDocument()
+  })
 })

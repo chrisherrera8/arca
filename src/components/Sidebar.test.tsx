@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '../../tests/test-utils'
 import Sidebar from './Sidebar'
+import styles from './Sidebar.module.css'
 import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('Sidebar Component', () => {
@@ -98,6 +99,6 @@ describe('Sidebar Component', () => {
     )
     
     const dashboardLink = screen.getByRole('link', { name: /dashboard/i })
-    expect(dashboardLink.closest('[data-active="true"]')).toBeInTheDocument()
+    expect(dashboardLink.closest(`.${styles.navItemActive}`)).toBeInTheDocument()
   })
 })

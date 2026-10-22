@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '../../tests/test-utils'
 import Dashboard from './Dashboard'
 import App from '../App'
+import styles from './Dashboard.module.css'
 
 describe('Dashboard Page', () => {
   it('renders the empty state message when no budgets exist', () => {
@@ -14,7 +15,7 @@ describe('Dashboard Page', () => {
     render(<Dashboard />)
 
     const emptyText = screen.getByText(/create your first budget here/i)
-    expect(emptyText).toHaveClass('empty-dashboard-text')
+    expect(emptyText).toHaveClass(styles.emptyText)
   })
 
   it('centers the empty state message on the canvas', () => {
