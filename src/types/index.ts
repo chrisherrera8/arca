@@ -43,4 +43,4 @@ export interface BudgetFormData {
 }
 
 // Navigation types
-export type PageName = 'dashboard' | 'budgets' | 'budget-create' | 'teams' | 'analytics' | 'settings' | 'logout'
+export type PageName = 'dashboard' | 'budgets' | 'budget-create' | 'teams' | 'analytics' | 'settings'

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { afterEach, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
-import type { ReactNode } from 'react'
+import { createElement, type ReactNode } from 'react'
 import { TEST_ADMIN_USER } from './fixtures'
 
 // Cleanup after each test
@@ -27,5 +27,7 @@ vi.mock('@clerk/react', () => ({
   useOrganization: () => ({ organization: { name: 'Acme' }, membership: null }),
   SignIn: () => null,
   SignUp: () => null,
+  UserButton: () => createElement('div', { 'data-testid': 'user-button' }),
+  OrganizationSwitcher: () => createElement('div', { 'data-testid': 'org-switcher' }),
   ClerkProvider: ({ children }: { children: ReactNode }) => children,
 }))

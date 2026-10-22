@@ -32,9 +32,6 @@ export default function AppLayout() {
       case 'settings':
         navigate('/settings')
         break
-      case 'logout':
-        navigate('/logout')
-        break
     }
   }
 
@@ -42,7 +39,7 @@ export default function AppLayout() {
     <div className={styles.appLayout}>
       <Sidebar currentUser={currentUser} orgName={organization?.name} onNavigate={handleNavigate} />
       <div className={styles.appMain}>
-        <TopBar currentUser={currentUser} />
+        <TopBar />
         <main>
           <Outlet />
         </main>

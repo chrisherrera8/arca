@@ -1,42 +1,31 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '../../tests/test-utils'
 import TopBar from './TopBar'
-import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('TopBar Component', () => {
-  it('renders the user name', () => {
-    render(<TopBar currentUser={TEST_ADMIN_USER} />)
+  it('renders Clerk\'s user button', () => {
+    render(<TopBar />)
 
-    expect(screen.getByText('Admin User')).toBeInTheDocument()
+    expect(screen.getByTestId('user-button')).toBeInTheDocument()
   })
 
-  it('renders the user email', () => {
-    render(<TopBar currentUser={TEST_ADMIN_USER} />)
+  it('renders Clerk\'s organization switcher', () => {
+    render(<TopBar />)
 
-    expect(screen.getByText('admin@acme.com')).toBeInTheDocument()
+    expect(screen.getByTestId('org-switcher')).toBeInTheDocument()
   })
 
   it('renders a notifications button', () => {
-    render(<TopBar currentUser={TEST_ADMIN_USER} />)
+    render(<TopBar />)
 
     const notifButton = screen.getByRole('button', { name: /notifications/i })
     expect(notifButton).toBeInTheDocument()
   })
 
-  it('renders a user avatar', () => {
-    render(<TopBar currentUser={TEST_ADMIN_USER} />)
-
-    const avatar = screen.getByLabelText(/user avatar/i)
-    expect(avatar).toBeInTheDocument()
-  })
-
   it('does not render a search bar', () => {
-    render(<TopBar currentUser={TEST_ADMIN_USER} />)
+    render(<TopBar />)
 
-    const searchInput = screen.queryByRole('searchbox')
-    expect(searchInput).not.toBeInTheDocument()
-
-    const searchPlaceholder = screen.queryByPlaceholderText(/search/i)
-    expect(searchPlaceholder).not.toBeInTheDocument()
+    expect(screen.queryByRole('searchbox')).not.toBeInTheDocument()
+    expect(screen.queryByPlaceholderText(/search/i)).not.toBeInTheDocument()
   })
 })

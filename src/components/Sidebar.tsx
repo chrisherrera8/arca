@@ -44,7 +44,6 @@ export default function Sidebar({ orgName, onNavigate, activePage }: SidebarProp
 
       <div className={styles.footer}>
         <button className={styles.footerButton} onClick={() => onNavigate('settings')}>Settings</button>
-        <button className={styles.footerButton} onClick={() => onNavigate('logout')}>Logout</button>
       </div>
     </aside>
   )

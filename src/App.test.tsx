@@ -19,13 +19,13 @@ describe('App', () => {
     expect(screen.getByText('Acme')).toBeInTheDocument()
   })
 
-  it('renders the top bar with user info', () => {
+  it('renders the top bar with Clerk user button and org switcher', () => {
     render(<App />, {
       initialRoute: '/dashboard',
     })
 
-    expect(screen.getByText('Admin User')).toBeInTheDocument()
-    expect(screen.getByText('admin@acme.com')).toBeInTheDocument()
+    expect(screen.getByTestId('user-button')).toBeInTheDocument()
+    expect(screen.getByTestId('org-switcher')).toBeInTheDocument()
   })
 
   it('navigates to budget creation page', () => {

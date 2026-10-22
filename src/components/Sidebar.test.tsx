@@ -34,13 +34,6 @@ describe('Sidebar Component', () => {
     expect(settingsButton).toBeInTheDocument()
   })
 
-  it('renders Logout button at the bottom', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
-    
-    const logoutButton = screen.getByRole('button', { name: /logout/i })
-    expect(logoutButton).toBeInTheDocument()
-  })
-
   it('calls onNavigate when Dashboard menu item is clicked', () => {
     render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
     
@@ -79,14 +72,6 @@ describe('Sidebar Component', () => {
     const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     expect(mockNavigate).toHaveBeenCalledWith('settings')
-  })
-
-  it('calls onNavigate when Logout button is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
-    
-    const logoutButton = screen.getByRole('button', { name: /logout/i })
-    fireEvent.click(logoutButton)
-    expect(mockNavigate).toHaveBeenCalledWith('logout')
   })
 
   it('highlights the active menu item', () => {

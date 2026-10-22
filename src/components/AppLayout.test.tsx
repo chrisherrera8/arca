@@ -11,11 +11,11 @@ describe('AppLayout Component', () => {
     expect(screen.getByText('Budgets')).toBeInTheDocument()
   })
 
-  it('renders the top bar with user info', () => {
+  it('renders the top bar with Clerk user button and org switcher', () => {
     render(<AppLayout />)
 
-    expect(screen.getByText('Admin User')).toBeInTheDocument()
-    expect(screen.getByText('admin@acme.com')).toBeInTheDocument()
+    expect(screen.getByTestId('user-button')).toBeInTheDocument()
+    expect(screen.getByTestId('org-switcher')).toBeInTheDocument()
   })
 
   it('renders the top bar with notifications button', () => {
@@ -40,10 +40,10 @@ describe('AppLayout Component', () => {
     expect(screen.getByText('Analytics')).toBeInTheDocument()
   })
 
-  it('renders Settings and Logout in the sidebar', () => {
+  it('renders Settings in the sidebar', () => {
     render(<AppLayout />)
 
     expect(screen.getByRole('button', { name: /settings/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /logout/i })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /logout/i })).not.toBeInTheDocument()
   })
 })
