@@ -2,31 +2,30 @@ import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '../../tests/test-utils'
 import Dashboard from './Dashboard'
 import App from '../App'
-import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('Dashboard Page', () => {
   it('renders the empty state message when no budgets exist', () => {
-    render(<Dashboard />, { currentUser: TEST_ADMIN_USER })
+    render(<Dashboard />)
 
     expect(screen.getByText(/create your first budget here/i)).toBeInTheDocument()
   })
 
   it('renders the empty state text in grey', () => {
-    render(<Dashboard />, { currentUser: TEST_ADMIN_USER })
+    render(<Dashboard />)
 
     const emptyText = screen.getByText(/create your first budget here/i)
     expect(emptyText).toHaveClass('empty-dashboard-text')
   })
 
   it('centers the empty state message on the canvas', () => {
-    render(<Dashboard />, { currentUser: TEST_ADMIN_USER })
+    render(<Dashboard />)
 
     const emptyContainer = screen.getByTestId('dashboard-empty-state')
     expect(emptyContainer).toBeInTheDocument()
   })
 
   it('renders the "Add Budget" button', () => {
-    render(<Dashboard />, { currentUser: TEST_ADMIN_USER })
+    render(<Dashboard />)
 
     const addButton = screen.getByRole('button', { name: /add budget/i })
     expect(addButton).toBeInTheDocument()
@@ -35,7 +34,6 @@ describe('Dashboard Page', () => {
 
   it('navigates to budget creation page when "Add Budget" is clicked', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/dashboard',
     })
 

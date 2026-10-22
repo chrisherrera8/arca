@@ -3,24 +3,23 @@ import { render, screen, waitFor } from '../../tests/test-utils'
 import userEvent from '@testing-library/user-event'
 import BudgetCreate from './BudgetCreate'
 import App from '../App'
-import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('BudgetCreate Page', () => {
   it('renders the page heading', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     expect(screen.getByRole('heading', { name: /create budget/i })).toBeInTheDocument()
   })
 
   it('renders the budget name input field', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const nameInput = screen.getByLabelText(/budget name/i)
     expect(nameInput).toBeInTheDocument()
   })
 
   it('renders the budget amount input field', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const amountInput = screen.getByLabelText(/budget amount/i)
     expect(amountInput).toBeInTheDocument()
@@ -28,7 +27,7 @@ describe('BudgetCreate Page', () => {
   })
 
   it('renders a team selection dropdown with 3 teams', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const teamSelect = screen.getByLabelText(/team/i)
     expect(teamSelect).toBeInTheDocument()
@@ -39,7 +38,7 @@ describe('BudgetCreate Page', () => {
   })
 
   it('renders the three team options: Engineering, Marketing, Operations', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     expect(screen.getByRole('option', { name: /engineering/i })).toBeInTheDocument()
     expect(screen.getByRole('option', { name: /marketing/i })).toBeInTheDocument()
@@ -47,7 +46,7 @@ describe('BudgetCreate Page', () => {
   })
 
   it('renders a submit button', () => {
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const submitButton = screen.getByRole('button', { name: /create budget/i })
     expect(submitButton).toBeInTheDocument()
@@ -55,7 +54,7 @@ describe('BudgetCreate Page', () => {
 
   it('allows the user to fill in the budget name', async () => {
     const user = userEvent.setup()
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const nameInput = screen.getByLabelText(/budget name/i)
     await user.type(nameInput, 'Q1 Engineering Budget')
@@ -65,7 +64,7 @@ describe('BudgetCreate Page', () => {
 
   it('allows the user to fill in the budget amount', async () => {
     const user = userEvent.setup()
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const amountInput = screen.getByLabelText(/budget amount/i)
     await user.type(amountInput, '50000')
@@ -75,7 +74,7 @@ describe('BudgetCreate Page', () => {
 
   it('allows the user to select a team', async () => {
     const user = userEvent.setup()
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const teamSelect = screen.getByLabelText(/team/i)
     await user.selectOptions(teamSelect, 'team-1')
@@ -85,7 +84,7 @@ describe('BudgetCreate Page', () => {
 
   it('shows validation errors when submitting empty form', async () => {
     const user = userEvent.setup()
-    render(<BudgetCreate />, { currentUser: TEST_ADMIN_USER })
+    render(<BudgetCreate />)
 
     const submitButton = screen.getByRole('button', { name: /create budget/i })
     await user.click(submitButton)
@@ -98,7 +97,6 @@ describe('BudgetCreate Page', () => {
   it('submits the form and navigates to budgets list on success', async () => {
     const user = userEvent.setup()
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/budget/create',
     })
 

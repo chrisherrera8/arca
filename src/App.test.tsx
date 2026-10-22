@@ -1,12 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '../tests/test-utils'
 import App from './App'
-import { TEST_ADMIN_USER } from '../tests/fixtures'
 
 describe('App', () => {
   it('renders the dashboard page by default for authenticated users', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/dashboard',
     })
 
@@ -15,7 +13,6 @@ describe('App', () => {
 
   it('renders the sidebar with organization name', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/dashboard',
     })
 
@@ -24,7 +21,6 @@ describe('App', () => {
 
   it('renders the top bar with user info', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/dashboard',
     })
 
@@ -34,7 +30,6 @@ describe('App', () => {
 
   it('navigates to budget creation page', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/budget/create',
     })
 
@@ -43,7 +38,6 @@ describe('App', () => {
 
   it('navigates to budgets list page', () => {
     render(<App />, {
-      currentUser: TEST_ADMIN_USER,
       initialRoute: '/budgets',
     })
 
