@@ -1,8 +1,7 @@
-import type { User, PageName } from '@/types'
+import type { PageName } from '@/types'
 import styles from './Sidebar.module.css'
 
 interface SidebarProps {
-  currentUser: User
   orgName?: string
   onNavigate: (page: string) => void
   activePage?: PageName

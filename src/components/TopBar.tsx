@@ -6,7 +6,7 @@ export default function TopBar() {
     <header className={styles.topbar}>
       <div className={styles.right}>
         <button className={styles.notificationsButton} aria-label="Notifications">Notifications</button>
-        <OrganizationSwitcher hidePersonal />
+        <OrganizationSwitcher />
         <UserButton showName />
       </div>
     </header>

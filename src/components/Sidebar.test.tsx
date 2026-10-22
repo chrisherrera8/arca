@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '../../tests/test-utils'
 import Sidebar from './Sidebar'
 import styles from './Sidebar.module.css'
-import { TEST_ADMIN_USER } from '../../tests/fixtures'
 
 describe('Sidebar Component', () => {
   const mockNavigate = vi.fn()
@@ -12,14 +11,14 @@ describe('Sidebar Component', () => {
   })
 
   it('renders organization name "Acme"', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} orgName="Acme" onNavigate={mockNavigate} />)
+    render(<Sidebar orgName="Acme" onNavigate={mockNavigate} />)
     
     const orgName = screen.getByText('Acme')
     expect(orgName).toBeInTheDocument()
   })
 
   it('renders all menu items: Dashboard, Budgets, Teams, Analytics', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     expect(screen.getByText('Dashboard')).toBeInTheDocument()
     expect(screen.getByText('Budgets')).toBeInTheDocument()
@@ -28,14 +27,14 @@ describe('Sidebar Component', () => {
   })
 
   it('renders Settings button at the bottom', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const settingsButton = screen.getByRole('button', { name: /settings/i })
     expect(settingsButton).toBeInTheDocument()
   })
 
   it('calls onNavigate when Dashboard menu item is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const dashboardLink = screen.getByRole('link', { name: /dashboard/i })
     fireEvent.click(dashboardLink)
@@ -43,7 +42,7 @@ describe('Sidebar Component', () => {
   })
 
   it('calls onNavigate when Budgets menu item is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const budgetsLink = screen.getByRole('link', { name: /budgets/i })
     fireEvent.click(budgetsLink)
@@ -51,7 +50,7 @@ describe('Sidebar Component', () => {
   })
 
   it('calls onNavigate when Teams menu item is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const teamsLink = screen.getByRole('link', { name: /teams/i })
     fireEvent.click(teamsLink)
@@ -59,7 +58,7 @@ describe('Sidebar Component', () => {
   })
 
   it('calls onNavigate when Analytics menu item is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const analyticsLink = screen.getByRole('link', { name: /analytics/i })
     fireEvent.click(analyticsLink)
@@ -67,7 +66,7 @@ describe('Sidebar Component', () => {
   })
 
   it('calls onNavigate when Settings button is clicked', () => {
-    render(<Sidebar currentUser={TEST_ADMIN_USER} onNavigate={mockNavigate} />)
+    render(<Sidebar onNavigate={mockNavigate} />)
     
     const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
@@ -77,7 +76,7 @@ describe('Sidebar Component', () => {
   it('highlights the active menu item', () => {
     render(
       <Sidebar 
-        currentUser={TEST_ADMIN_USER} 
+        
         onNavigate={mockNavigate} 
         activePage="dashboard"
       />

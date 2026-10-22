@@ -1,16 +1,12 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useOrganization } from '@clerk/react'
-import { useCurrentUser } from '@/hooks/useCurrentUser'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 import styles from './AppLayout.module.css'
 
 export default function AppLayout() {
-  const { currentUser } = useCurrentUser()
   const { organization } = useOrganization()
   const navigate = useNavigate()
-
-  if (!currentUser) return null
 
   const handleNavigate = (page: string) => {
     switch (page) {
@@ -37,7 +33,7 @@ export default function AppLayout() {
 
   return (
     <div className={styles.appLayout}>
-      <Sidebar currentUser={currentUser} orgName={organization?.name} onNavigate={handleNavigate} />
+      <Sidebar orgName={organization?.name} onNavigate={handleNavigate} />
       <div className={styles.appMain}>
         <TopBar />
         <main>
