@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '@/contexts/AuthContext'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useBudgets } from '@/contexts/BudgetContext'
 import styles from './BudgetCreate.module.css'
 
 export default function BudgetCreate() {
   const navigate = useNavigate()
-  const { currentUser } = useAuth()
+  const { currentUser } = useCurrentUser()
   const { teams, addBudget } = useBudgets()
 
   const [name, setName] = useState('')

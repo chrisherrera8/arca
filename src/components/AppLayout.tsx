@@ -1,27 +1,16 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useUser, useOrganization } from '@clerk/react'
-import type { User } from '@/types'
+import { useOrganization } from '@clerk/react'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 import styles from './AppLayout.module.css'
 
 export default function AppLayout() {
-  const { user, isLoaded } = useUser()
-  const { organization, membership } = useOrganization()
+  const { currentUser } = useCurrentUser()
+  const { organization } = useOrganization()
   const navigate = useNavigate()
 
-  if (!isLoaded) return null
-  if (!user) return null
-
-  const currentUser: User = {
-    id: user.id,
-    name: user.fullName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? 'Unknown',
-    email: user.primaryEmailAddress?.emailAddress ?? '',
-    role: (membership?.role.replace('org:', '') as User['role']) ?? 'member',
-    avatar: user.imageUrl,
-    createdAt: user.createdAt ?? new Date(),
-    updatedAt: user.updatedAt ?? new Date(),
-  }
+  if (!currentUser) return null
 
   const handleNavigate = (page: string) => {
     switch (page) {
